@@ -9,6 +9,7 @@ Libary for easily writing fragment shaders with webGL.
 - pressing `Tab` saves a screenshot of the shader, this can also be done with the functon `screenshot()`
 - the function `radians(deg)` converts angles to radians. 
 - see `program.js` or `toy_mandelbulb.js` for examples
+- use `resize_canvas(width, height)` to change canvas size and disable automatic resizing.
 
 ## Passing Uniforms
 Use these functions to pass variables from the js program to the shaders

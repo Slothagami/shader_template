@@ -202,18 +202,24 @@ class WebGLFragment extends WebGlInterface {
 
 const radians = deg => deg * Math.PI / 180
 
+function resize_canvas(width, height, isevent=false) {
+    if(isevent && !auto_resize) return
+    if(!isevent) auto_resize = false
+
+    // resize canvas
+    canv.width  = width
+    canv.height = height
+
+    // update shader size uniforms
+    gl.uniformVec2("vRes", [width, height])
+    gl.uniformVec2("vRatio", [width / height, 1])
+}
 
 // setup base program
-var canv, gl
+var canv, gl, auto_resize = true
 window.addEventListener("load", () => {
     window.addEventListener("resize", e => {
-        // resize canvas
-        canv.width  = window.innerWidth
-        canv.height = window.innerHeight
-
-        // update shader size uniforms
-        gl.uniformVec2("vRes", [canv.width, canv.height])
-        gl.uniformVec2("vRatio", [canv.width / canv.height, 1])
+        resize_canvas(window.innerWidth, window.innerHeight, true)
     })
 
     window.addEventListener("keydown", e => {
